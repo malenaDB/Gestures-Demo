@@ -8,13 +8,44 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController
+{
 
-    override func viewDidLoad() {
+    @IBOutlet weak var myImageView: UIImageView!
+    
+    @IBOutlet weak var myLabel: UILabel!
+
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
+    
+    @IBAction func imageViewTapped(_ sender: UITapGestureRecognizer)
+    {
+        view.backgroundColor = UIColor.systemTeal
+    }
+    
+    
+    @IBAction func flowerEmojiPanned(_ sender: UIPanGestureRecognizer)
+    {
+         // 1
+          let translation = sender.translation(in: view)
 
+          // 2
+          guard let gestureView = sender.view else
+          {
+            return
+          }
+
+          gestureView.center = CGPoint(
+            x: gestureView.center.x + translation.x,
+            y: gestureView.center.y + translation.y
+          )
+
+          // 3
+          sender.setTranslation(.zero, in: view)
+    }
 }
 
